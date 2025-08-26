@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TripNest - Booking</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Clouds -->
+  <div class="cloud right"></div>
+  <div class="cloud left"></div>
+  <div class="cloud right2"></div>
+  <div class="cloud left2"></div>
+
   <!-- Step 1 -->
   <section id="step1" class="step active">
     <h1>TripNest</h1>
@@ -20,56 +26,4 @@
     <h2 id="formTitle"></h2>
     <form id="bookingForm">
       <label>Name: <input type="text" id="name" required></label><br>
-      <label>Age: <input type="number" id="age" required></label><br>
-      <label>Passengers: <input type="number" id="passengers" required></label><br>
-      <label>Contact: <input type="text" id="contact" required></label><br>
-      <label>Email: <input type="email" id="email" required></label><br>
-      <label>Destination:
-        <select id="destinationSelect"></select>
-      </label><br>
-      <label>Airline:
-        <select id="airline">
-          <option>Emirates</option>
-          <option>Singapore Airlines</option>
-          <option>Qatar Airways</option>
-          <option>Air India</option>
-        </select>
-      </label><br>
-      <label>Number of Days: <input type="number" id="days" required></label><br>
-      <label>Departure: <input type="date" id="departure" required></label><br>
-      <label>Arrival: <input type="date" id="arrival" required></label><br>
-      <button type="submit">Proceed</button>
-    </form>
-  </section>
-
-  <!-- Step 3 -->
-  <section id="step3" class="step">
-    <h2>Confirm Your Booking with TripNest</h2>
-    <div id="confirmationDetails"></div>
-    <button id="btnConfirm">Confirm Booking</button>
-  </section>
-
-  <!-- Step 4 -->
-  <section id="step4" class="step">
-    <h2 id="caption">TripNest Booking Confirmed</h2>
-    <p><strong>Name:</strong> <span id="outName"></span></p>
-    <p><strong>Age:</strong> <span id="outAge"></span></p>
-    <p><strong>Passengers:</strong> <span id="outPassengers"></span></p>
-    <p><strong>Contact:</strong> <span id="outContact"></span></p>
-    <p><strong>Email:</strong> <span id="outEmail"></span></p>
-    <p><strong>Destination:</strong> <span id="outDestination"></span></p>
-    <p><strong>Airline:</strong> <span id="outAirline"></span></p>
-    <p><strong>Days:</strong> <span id="outDays"></span></p>
-    <p><strong>Departure:</strong> <span id="outDeparture"></span></p>
-    <p><strong>Arrival:</strong> <span id="outArrival"></span></p>
-    <p><strong>Total Price:</strong> <span id="outPrice"></span></p>
-    <p><strong>Discount:</strong> <span id="outDiscount"></span></p>
-    <p><strong>Final Amount:</strong> <span id="outFinal"></span></p>
-
-    <img id="qrCode" alt="QR Code" />
-    <p><a id="confirmationLink" href="#" target="_blank">View Confirmation Online</a></p>
-  </section>
-
-  <script src="script.js"></script>
-</body>
-</html>
+      <label>Age: <input type="
