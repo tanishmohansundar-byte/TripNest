@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #87ceeb, #f0f8ff);
+  overflow-x: hidden;
+}
+
+.step {
+  display: none;
+  height: 100vh;
+  text-align: center;
+  padding: 20px;
+  overflow-y: auto; /* scrollable steps */
+}
+
+.step.active {
+  display: block;
+}
+
+h1, h2 {
+  margin-top: 30px;
+  color: #003366;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #003366;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0055aa;
+}
+
+form {
+  margin-top: 20px;
+  text-align: left;
+  display: inline-block;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input, select {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+img#qrCode {
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+}
+
+/* Cloud animation */
+.cloud {
+  position: absolute;
+  top: 50px;
+  width: 200px;
+  height: 120px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: moveClouds 60s linear infinite;
+}
+
+.cloud::before, .cloud::after {
+  content: '';
+  position: absolute;
+  background: white;
+  width: 100px;
+  height: 100px;
+  top: -40px;
+  left: 20px;
+  border-radius: 50%;
+}
+
+.cloud::after {
+  width: 120px;
+  height: 120px;
+  top: -20px;
+  left: auto;
+  right: 20px;
+}
+
+@keyframes moveClouds {
+  from { left: -250px; }
+  to { left: 100%; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #003366;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #cce6ff;
+}
