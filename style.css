@@ -1,33 +1,22 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to top, #87ceeb, #ccefff);
+  background: linear-gradient(to bottom, #87ceeb, #e0f7ff);
   overflow-x: hidden;
 }
 
-.step {
-  display: none;
-  padding: 20px;
-  height: 100vh;
-  overflow-y: auto;  /* scrollbar */
-}
-
-.step.active {
-  display: block;
-}
+.step { display: none; padding: 40px; min-height: 100vh; }
+.step.active { display: block; }
 
 button {
-  margin-top: 10px;
-  padding: 10px 15px;
+  padding: 12px 20px;
+  margin: 10px;
+  font-size: 16px;
   border: none;
+  border-radius: 8px;
   background: #0077cc;
-  color: white;
-  border-radius: 6px;
+  color: #fff;
   cursor: pointer;
-}
-
-button:hover {
-  background: #005fa3;
 }
 
 /* Clouds */
@@ -41,34 +30,10 @@ button:hover {
   filter: drop-shadow(0 8px 12px rgba(0,0,0,.08));
 }
 
-/* Left → Right */
-.cloud.right {
-  top: 10vh;
-  left: -240px;
-  animation: moveRight 60s linear infinite;
-}
-.cloud.right2 {
-  top: 70vh;
-  left: -200px;
-  animation: moveRight 80s linear infinite;
-}
-@keyframes moveRight {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(140vw); }
-}
+.cloud.right { top: 10vh; left: -240px; animation: moveRight 60s linear infinite; }
+.cloud.right2 { top: 70vh; left: -200px; animation: moveRight 70s linear infinite; }
+.cloud.left { top: 40vh; right: -240px; animation: moveLeft 65s linear infinite; }
+.cloud.left2 { top: 85vh; right: -220px; animation: moveLeft 75s linear infinite; }
 
-/* Right → Left */
-.cloud.left {
-  top: 40vh;
-  right: -240px;
-  animation: moveLeft 65s linear infinite;
-}
-.cloud.left2 {
-  top: 85vh;
-  right: -200px;
-  animation: moveLeft 75s linear infinite;
-}
-@keyframes moveLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-140vw); }
-}
+@keyframes moveRight { from { transform: translateX(0); } to { transform: translateX(140vw); } }
+@keyframes moveLeft { from { transform: translateX(0); } to { transform: translateX(-140vw); } }
