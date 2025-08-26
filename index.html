@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TripNest - Booking</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Step 1 -->
+  <section id="step1" class="step active">
+    <h1>TripNest</h1>
+    <p>Turn miles into smiles!</p>
+    <button id="btnInternational">International</button>
+    <button id="btnDomestic">Domestic</button>
+  </section>
+
+  <!-- Step 2 -->
+  <section id="step2" class="step">
+    <h2 id="formTitle"></h2>
+    <form id="bookingForm">
+      <label>Name: <input type="text" id="name" required></label><br>
+      <label>Age: <input type="number" id="age" required></label><br>
+      <label>Passengers: <input type="number" id="passengers" required></label><br>
+      <label>Contact: <input type="text" id="contact" required></label><br>
+      <label>Email: <input type="email" id="email" required></label><br>
+      <label>Destination:
+        <select id="destinationSelect"></select>
+      </label><br>
+      <label>Airline:
+        <select id="airline">
+          <option>Emirates</option>
+          <option>Singapore
