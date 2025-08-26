@@ -1,108 +1,74 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #87ceeb, #f0f8ff);
+  background: linear-gradient(to top, #87ceeb, #ccefff);
   overflow-x: hidden;
 }
 
 .step {
   display: none;
-  height: 100vh;
-  text-align: center;
   padding: 20px;
-  overflow-y: auto; /* scrollable steps */
+  height: 100vh;
+  overflow-y: auto;  /* scrollbar */
 }
 
 .step.active {
   display: block;
 }
 
-h1, h2 {
-  margin-top: 30px;
-  color: #003366;
-}
-
 button {
-  padding: 10px 20px;
-  margin: 10px;
+  margin-top: 10px;
+  padding: 10px 15px;
   border: none;
-  border-radius: 8px;
-  background-color: #003366;
+  background: #0077cc;
   color: white;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
 }
 
 button:hover {
-  background-color: #0055aa;
+  background: #005fa3;
 }
 
-form {
-  margin-top: 20px;
-  text-align: left;
-  display: inline-block;
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-input, select {
-  padding: 5px;
-  margin-left: 10px;
-}
-
-img#qrCode {
-  margin-top: 20px;
-  width: 150px;
-  height: 150px;
-}
-
-/* Cloud animation */
+/* Clouds */
 .cloud {
   position: absolute;
-  top: 50px;
-  width: 200px;
+  width: 220px;
   height: 120px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: moveClouds 60s linear infinite;
+  background: #fff;
+  border-radius: 60px;
+  opacity: .9;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,.08));
 }
 
-.cloud::before, .cloud::after {
-  content: '';
-  position: absolute;
-  background: white;
-  width: 100px;
-  height: 100px;
-  top: -40px;
-  left: 20px;
-  border-radius: 50%;
+/* Left → Right */
+.cloud.right {
+  top: 10vh;
+  left: -240px;
+  animation: moveRight 60s linear infinite;
+}
+.cloud.right2 {
+  top: 70vh;
+  left: -200px;
+  animation: moveRight 80s linear infinite;
+}
+@keyframes moveRight {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(140vw); }
 }
 
-.cloud::after {
-  width: 120px;
-  height: 120px;
-  top: -20px;
-  left: auto;
-  right: 20px;
+/* Right → Left */
+.cloud.left {
+  top: 40vh;
+  right: -240px;
+  animation: moveLeft 65s linear infinite;
 }
-
-@keyframes moveClouds {
-  from { left: -250px; }
-  to { left: 100%; }
+.cloud.left2 {
+  top: 85vh;
+  right: -200px;
+  animation: moveLeft 75s linear infinite;
 }
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: #003366;
-  border-radius: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #cce6ff;
+@keyframes moveLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-140vw); }
 }
