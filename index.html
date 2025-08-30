@@ -7,21 +7,27 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      font-family: 'Trebuchet MS', sans-serif;
+      background: linear-gradient(135deg, #ff9966, #ff5e62, #8e54e9);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
       color: #fff;
-      height: 100vh;
-      overflow-y: scroll;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     #app {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
       text-align: center;
+      padding: 20px;
+      max-width: 600px;
     }
 
     h1, h2, h3, p {
@@ -29,37 +35,41 @@
     }
 
     button {
-      background: #0084ff;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 20px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 12px;
+      padding: 12px 25px;
       margin: 10px;
       font-size: 16px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      backdrop-filter: blur(6px);
+      transition: 0.3s;
     }
 
     button:hover {
-      background: #005bb5;
+      background: rgba(255,255,255,0.4);
+      box-shadow: 0 0 15px rgba(255,255,255,0.8);
     }
 
     input {
-      padding: 10px;
-      border-radius: 5px;
+      padding: 12px;
+      border-radius: 8px;
       border: none;
       margin: 10px 0;
+      width: 80%;
+      text-align: center;
     }
 
-    /* Dark Blue Scrollbar */
+    /* Scrollbar - purple theme */
     ::-webkit-scrollbar {
       width: 10px;
     }
     ::-webkit-scrollbar-track {
-      background: #001f3f;
+      background: #3b0a45;
     }
     ::-webkit-scrollbar-thumb {
-      background: #004aad;
+      background: #8e44ad;
       border-radius: 5px;
     }
   </style>
@@ -69,65 +79,52 @@
 
   <script>
     const app = document.getElementById("app");
-    let booking = {
-      destination: "",
-      flight: "",
-      seat: "",
-      passengerName: "",
-      passengerAge: 0,
-      price: 0
-    };
+    let booking = {};
 
     function render(content) {
       app.innerHTML = content;
     }
 
-    // Welcome screen
+    // Welcome
     function showWelcome() {
+      booking = {}; // reset
       render(`
-        <h1>TripNest</h1>
-        <h2>Turn miles into smiles ✈️</h2>
+        <h1>🌅 TripNest 🌅</h1>
+        <h2>Turn miles into smiles</h2>
         <button onclick="chooseDestination()">Continue</button>
       `);
     }
 
     // Destination
     function chooseDestination() {
-      const destinations = ["Tate Nadu", "Kumkum Nagar", "Flower Nadu", "Amazon Nadu", "Towel Nadu"];
-      let destButtons = destinations.map(d => `<button onclick="selectDestination('${d}')">${d}</button>`).join("");
-
+      const dests = ["Tate Nadu", "Kumkum Nagar", "Flower Nadu", "Amazon Nadu", "Towel Nadu"];
       render(`
-        <h2>Select your destination</h2>
-        ${destButtons}
-        <br>
-        <button onclick="showWelcome()">⬅ Back</button>
+        <h2>Select Destination</h2>
+        ${dests.map(d => `<button onclick="selectDestination('${d}')">${d}</button>`).join("")}
+        <br><button onclick="showWelcome()">⬅ Back</button>
       `);
     }
 
-    // Flight options
+    // Flight
     function selectDestination(dest) {
       booking.destination = dest;
       const flights = ["Sute Pura", "Interlinse Flight", "Flower Flight", "Tate Flight"];
-      let flightButtons = flights.map(f => `<button onclick="chooseSeat('${f}')">${f}</button>`).join("");
-
       render(`
-        <h2>Select your flight</h2>
-        ${flightButtons}
-        <br>
-        <button onclick="chooseDestination()">⬅ Back</button>
+        <h2>Select Flight</h2>
+        ${flights.map(f => `<button onclick="chooseSeat('${f}')">${f}</button>`).join("")}
+        <br><button onclick="chooseDestination()">⬅ Back</button>
       `);
     }
 
-    // Seat selection
+    // Seat
     function chooseSeat(flight) {
       booking.flight = flight;
       render(`
-        <h2>Select your seat type</h2>
+        <h2>Select Seat Type</h2>
         <button onclick="enterDetails('Economy')">Economy</button>
         <button onclick="enterDetails('Premium Economy')">Premium Economy</button>
         <button onclick="enterDetails('Business')">Business</button>
-        <br>
-        <button onclick="selectDestination('${booking.destination}')">⬅ Back</button>
+        <br><button onclick="selectDestination('${booking.destination}')">⬅ Back</button>
       `);
     }
 
@@ -135,56 +132,46 @@
     function enterDetails(seat) {
       booking.seat = seat;
       render(`
-        <h2>Enter Passenger Details</h2>
-        <input type="text" id="pname" placeholder="Passenger Name"><br>
-        <input type="number" id="page" placeholder="Passenger Age"><br><br>
+        <h2>Passenger Details</h2>
+        <input type="text" id="pname" placeholder="Name"><br>
+        <input type="number" id="page" placeholder="Age"><br>
         <button onclick="validatePassenger()">Continue</button>
-        <br>
-        <button onclick="chooseSeat('${booking.flight}')">⬅ Back</button>
+        <br><button onclick="chooseSeat('${booking.flight}')">⬅ Back</button>
       `);
     }
 
-    // Passenger rules
+    // Validation
     function validatePassenger() {
-      booking.passengerName = document.getElementById("pname").value;
+      booking.passengerName = document.getElementById("pname").value.trim();
       booking.passengerAge = parseInt(document.getElementById("page").value);
 
       let name = booking.passengerName.toLowerCase();
 
-      if (name.endsWith("a") === false && name.startsWith("d")) {
-        render(`
-          <h2>❌ Not Allowed</h2>
-          <p>Your mouth is too tilted so get lost 😂</p>
-          <button onclick="enterDetails('${booking.seat}')">⬅ Back</button>
-        `);
+      // Rule: ends with "a"
+      if (name.endsWith("a")) {
+        render(`<h2>❌ Not Allowed</h2><p>You will make the flight stink 💨 so not allowed!</p><button onclick="enterDetails('${booking.seat}')">⬅ Back</button>`);
         return;
       }
-
-      if (booking.passengerName.toLowerCase().endsWith("u")) {
-        render(`
-          <h2>❌ Not Allowed</h2>
-          <p>You will make the flight stink 💩 so not allowed!</p>
-          <button onclick="enterDetails('${booking.seat}')">⬅ Back</button>
-        `);
+      // Rule: ends with "u"
+      if (name.endsWith("u")) {
+        render(`<h2>❌ Not Allowed</h2><p>You will make the flight stink 💨 so not allowed!</p><button onclick="enterDetails('${booking.seat}')">⬅ Back</button>`);
         return;
       }
-
       showSummary();
     }
 
-    // Price calculator
+    // Price
     function calculatePrice() {
-      let basePrice = 50000; // base in lator units
-      if (booking.seat === "Premium Economy") basePrice *= 1.05;
-      if (booking.seat === "Business") basePrice *= 1.20;
-      if (booking.passengerAge < 18) basePrice *= 0.75;
-      booking.price = Math.floor(basePrice) + "00 lators";
+      let base = 40000;
+      if (booking.seat === "Premium Economy") base *= 1.05;
+      if (booking.seat === "Business") base *= 1.20;
+      if (booking.passengerAge < 18) base *= 0.75;
+      booking.price = Math.floor(base) + "00 lators";
     }
 
     // Summary
     function showSummary() {
       calculatePrice();
-
       render(`
         <h2>Booking Summary</h2>
         <p><b>Name:</b> ${booking.passengerName}</p>
@@ -193,34 +180,42 @@
         <p><b>Flight:</b> ${booking.flight}</p>
         <p><b>Seat:</b> ${booking.seat}</p>
         <p><b>Price:</b> ${booking.price}</p>
-        <button onclick="showConfirmation()">Confirm Booking</button>
-        <br>
-        <button onclick="enterDetails('${booking.seat}')">⬅ Back</button>
+        <button onclick="showConfirmation()">Confirm</button>
+        <br><button onclick="enterDetails('${booking.seat}')">⬅ Back</button>
       `);
     }
 
     // Confirmation
     function showConfirmation() {
-      if (booking.passengerName.toLowerCase() === "kute") {
-        render(`
-          <h2>Ohh Shoresh Fans 🎶</h2>
-          <p>Special shoutout for ${booking.passengerName}!</p>
-          <button onclick="showBoardingPass()">View Boarding Pass</button>
-        `);
+      let name = booking.passengerName.toLowerCase();
+
+      if (name === "kute") {
+        render(`<h2>🎶 Ohh Shoresh Fans 🎶</h2><p>Special shoutout to ${booking.passengerName}!</p><button onclick="showBoardingPass()">Boarding Pass</button>`);
+        return;
+      }
+      if (name.startsWith("d") && !name.endsWith("a") && !name.endsWith("e")) {
+        render(`<h2>🙏 Thalaiva u r great 🙏</h2><p>Special respect to ${booking.passengerName}!</p><button onclick="showBoardingPass()">Boarding Pass</button>`);
+        return;
+      }
+      if (name === "senapathy") {
+        render(`<h2>🔥 Varmam potruva pathyy!! 🔥</h2><p>Welcome ${booking.passengerName}!</p><button onclick="showBoardingPass()">Boarding Pass</button>`);
+        return;
+      }
+      if (name === "allae") {
+        render(`<h2>💀 RIP Galla aith 💀</h2><p>Tribute to ${booking.passengerName}!</p><button onclick="showBoardingPass()">Boarding Pass</button>`);
         return;
       }
 
       render(`
-        <h2>Congratulations 🎉</h2>
-        <p>Your booking with <b>${booking.flight}</b> to <b>${booking.destination}</b> is confirmed!</p>
+        <h2>Booking Confirmed 🎉</h2>
+        <p>Your TripNest booking to <b>${booking.destination}</b> is done!</p>
         <p>Total Fare: ${booking.price}</p>
-        <button onclick="showBoardingPass()">View Boarding Pass</button>
-        <br>
-        <button onclick="showSummary()">⬅ Back</button>
+        <button onclick="showBoardingPass()">Boarding Pass</button>
+        <br><button onclick="showSummary()">⬅ Back</button>
       `);
     }
 
-    // Boarding pass
+    // Boarding Pass
     function showBoardingPass() {
       render(`
         <h2>Boarding Pass 🎫</h2>
@@ -228,22 +223,17 @@
         <p><b>Flight:</b> ${booking.flight}</p>
         <p><b>Seat:</b> ${booking.seat}</p>
         <p><b>Destination:</b> ${booking.destination}</p>
-        <p><b>Price:</b> ${booking.price}</p>
+        <p><b>Fare:</b> ${booking.price}</p>
         <button onclick="thankYou()">Finish</button>
-        <br>
-        <button onclick="showConfirmation()">⬅ Back</button>
+        <br><button onclick="showConfirmation()">⬅ Back</button>
       `);
     }
 
-    // Thank you screen
+    // Thank You
     function thankYou() {
-      render(`
-        <h1>Thanks for using TripNest! 🙏</h1>
-        <button onclick="showWelcome()">Book Again</button>
-      `);
+      render(`<h1>💜 Thanks for flying with TripNest! 💜</h1><button onclick="showWelcome()">Book Again</button>`);
     }
 
-    // Start app
     showWelcome();
   </script>
 </body>
